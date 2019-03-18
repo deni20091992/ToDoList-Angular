@@ -1,0 +1,60 @@
+<table class="table text-center">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Date
+      <button mat-icon-button (click)="sortAscending()">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <button mat-icon-button (click)="sortDescending()">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </button>
+    </th>
+    <th>Business
+      <button mat-icon-button (click)="sortAscendingBusines()">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <button mat-icon-button (click)="sortDescendingBusines()">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </button></th>
+    <th>Done</th>
+    <th>Edit</th>
+    <th>Remuve</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items;  let i = index"
+  [ngClass]="{'list-group-item-success':item.done}">
+    <th>{{i}}</th>
+    <td class="edit-date">
+      <input type="date"
+             [(ngModel)]="item.date" [disabled]="!item.isEdit"
+             [ngStyle]="{'border': isEditTask(item)}">
+    </td>
+    <td>
+      <input type="text"
+             [(ngModel)]="item.discription" [disabled]="!item.isEdit"
+             [ngStyle]="{'border':isEditTask(item)}">
+    </td>
+    <td (click)="done(item, i)">
+      <button *ngIf="item.done" mat-icon-button>
+        <mat-icon>thumb_up</mat-icon>
+      </button>
+      <button *ngIf="!item.done" mat-icon-button>
+        <mat-icon>thumb_down</mat-icon>
+      </button>
+    </td>
+    <td>
+      <button mat-icon-button (click)="editTask(item)"
+              [disabled]="item.done">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+    <td>
+      <button mat-icon-button (click)="deleteTask(i)">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
